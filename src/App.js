@@ -73,6 +73,18 @@ const App = () => {
     });
   }
 
+  const cancelEdit = () => {
+    const newItemList = data.items.map((item) => {
+      const newItem = { ...item };
+      newItem.canChange = false;
+      return newItem;
+    });
+    dispatch({
+      type: "updateCanChange",
+      payload: [...newItemList]
+    });
+  }
+
   const dispatchCanChange = (id) => {
     const newItemList = data.items.map((item) => {
       const newItem = { ...item };
@@ -118,9 +130,10 @@ const App = () => {
               ? <div className={styles.change}>
                   <textarea onChange={changeItem} value={value}>{value}</textarea>
                   {(inputError) && <div>{errorText}</div>} 
+                  <button onClick={cancelEdit}>Отмена</button> 
                   <button onClick={() => dispatchSaveItem (item.id, item.text)}>Сoхранить</button>  
                 </div>
-              : <div>
+              : <div className={styles.item_inner}>
                   <span onDoubleClick={() => dispatchCanChange(item.id)}>{item.text}</span>
                   <button onClick={() => dispatchDelete(item.id)}>X</button>
                 </div>

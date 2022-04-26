@@ -68,7 +68,7 @@ button {
   border-radius: 6px;
 }
 
-.item div {
+.item_inner {
   display: flex;
   justify-content: space-between;
   align-items: flex-start; 
@@ -81,8 +81,12 @@ button {
 
 .change {
   position: fixed;
-  width: calc(100% - 60px);
-  height: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
   padding: 30px;
   top: 0;
   left: 0;
@@ -90,7 +94,7 @@ button {
 }
 
 .change textarea {
-  flex: 2;
+  width: 100%;
   padding: 10px;
   height: 80%;
   border-radius: 6px;
