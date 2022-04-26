@@ -102,14 +102,15 @@ const App = () => {
   }, [data]);
 
   return (
-    <div>
-      <form onSubmit={dispatchNewItem}>
+    <div className={styles.wrapper}>
+      <h1 className={styles.title}>Электронный блокнот</h1>
+      <form className={styles.form} onSubmit={dispatchNewItem}>
         <input type="text" value={newItem} onChange={changeNewItem} />
-        <button>Добавить заметку</button>
+        <div><button>Добавить заметку</button></div>
       </form>
-      <ul>
+      <ul className={styles.list}>
         {data.items.map((item) => (
-          <li key={item.id}> 
+          <li key={item.id} className={styles.item}> 
             {item.canChange 
               ? <div>
                   <input type="text" onChange={changeItem} value={value}/> 
@@ -118,7 +119,7 @@ const App = () => {
                 </div>
               : <div>
                   <span onDoubleClick={() => dispatchCanChange(item.id)}>{item.text}</span>
-                  <button onClick={() => dispatchDelete(item.id)}>Удалить</button>
+                  <button onClick={() => dispatchDelete(item.id)}>X</button>
                 </div>
             }
           </li>
