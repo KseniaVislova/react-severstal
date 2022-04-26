@@ -111,3 +111,9 @@ button {
 .change button {
   background-color: #5CDB95;
 }
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 1.4rem;
+  }
+}
