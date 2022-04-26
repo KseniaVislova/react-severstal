@@ -20,6 +20,8 @@ function reducer(state = initialState, action) {
       return { ...state, items: action.payload };
     case "deleteItem": 
       return { ...state, items: action.payload };
+    case "deleteAllItems": 
+      return { ...state, items: action.payload };
     default:
       return state;
   }
@@ -33,7 +35,6 @@ const App = () => {
   const [errorText, setErrorText] = useState('');
 
   const changeNewItem = (e) => {
-    console.log(e.target.value)
     setNewItem(e.target.value);
   }
 
@@ -110,11 +111,17 @@ const App = () => {
     });
   }
 
+  const dispatchDeleteAll = () => {
+    const newItemList = [];
+    dispatch({
+      type: "deleteAllItems",
+      payload: [...newItemList]
+    });
+  }
+
   useEffect(() => {
     window.localStorage.setItem("data", JSON.stringify(data));
   }, [data]);
-
-  //<input type="text" onChange={changeItem} value={value}/> 
 
   return (
     <div className={styles.wrapper}>
@@ -123,6 +130,7 @@ const App = () => {
         <textarea onChange={changeNewItem} value={newItem}>{newItem}</textarea>
         <div><button>Добавить заметку</button></div>
       </form>
+      <button onClick={dispatchDeleteAll}>Очистить все заметки</button>
       <ul className={styles.list}>
         {data.items.map((item) => (
           <li key={item.id} className={styles.item}> 
