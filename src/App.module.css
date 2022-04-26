@@ -5,6 +5,7 @@ button {
   text-transform: uppercase;
   background-color: #05386B;
   border: 1px solid #05386B;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -26,14 +27,23 @@ button {
 .form {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 10px;
 }
 
-.form input {
-  height: 20px;
+.form textarea {
   flex: 2;
+  padding: 10px;
+  min-height: 220px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px #05386b;
+  border: 0;
+}
+
+.form textarea:focus{
+  border: none;
+  outline: none;
 }
 
 .form button {
@@ -52,7 +62,10 @@ button {
 
 .item {
   padding: 10px;
-  border: 2px solid #05386B;
+  max-height: 100px;
+  box-shadow: 0px 0px 10px #05386b;
+  overflow: auto;
+  border-radius: 6px;
 }
 
 .item div {
@@ -64,4 +77,32 @@ button {
 
 .item span {
   display: block;
+}
+
+.change {
+  position: fixed;
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+  padding: 30px;
+  top: 0;
+  left: 0;
+  background-color: #05386B;
+}
+
+.change textarea {
+  flex: 2;
+  padding: 10px;
+  height: 80%;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px #5CDB95;
+  border: 0;
+}
+
+.change textarea:focus {
+  border: none;
+  outline: none;
+}
+
+.change button {
+  background-color: #5CDB95;
 }

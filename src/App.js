@@ -33,6 +33,7 @@ const App = () => {
   const [errorText, setErrorText] = useState('');
 
   const changeNewItem = (e) => {
+    console.log(e.target.value)
     setNewItem(e.target.value);
   }
 
@@ -101,19 +102,21 @@ const App = () => {
     window.localStorage.setItem("data", JSON.stringify(data));
   }, [data]);
 
+  //<input type="text" onChange={changeItem} value={value}/> 
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Электронный блокнот</h1>
       <form className={styles.form} onSubmit={dispatchNewItem}>
-        <input type="text" value={newItem} onChange={changeNewItem} />
+        <textarea onChange={changeNewItem} value={newItem}>{newItem}</textarea>
         <div><button>Добавить заметку</button></div>
       </form>
       <ul className={styles.list}>
         {data.items.map((item) => (
           <li key={item.id} className={styles.item}> 
             {item.canChange 
-              ? <div>
-                  <input type="text" onChange={changeItem} value={value}/> 
+              ? <div className={styles.change}>
+                  <textarea onChange={changeItem} value={value}>{value}</textarea>
                   {(inputError) && <div>{errorText}</div>} 
                   <button onClick={() => dispatchSaveItem (item.id, item.text)}>Сoхранить</button>  
                 </div>
