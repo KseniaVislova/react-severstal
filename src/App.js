@@ -18,6 +18,8 @@ function reducer(state = initialState, action) {
       return { ...state, items: action.payload };
     case "updateItem": 
       return { ...state, items: action.payload };
+    case "deleteItem": 
+      return { ...state, items: action.payload };
     default:
       return state;
   }
@@ -87,6 +89,14 @@ const App = () => {
     });
   }
 
+  const dispatchDelete = (id) => {
+    const newItemList = data.items.filter((item) => item.id !== id);
+    dispatch({
+      type: "deleteItem",
+      payload: [...newItemList]
+    });
+  }
+
   useEffect(() => {
     window.localStorage.setItem("data", JSON.stringify(data));
   }, [data]);
@@ -106,7 +116,10 @@ const App = () => {
                   {(inputError) && <div>{errorText}</div>} 
                   <button onClick={() => dispatchSaveItem (item.id, item.text)}>Сoхранить</button>  
                 </div>
-              : <span onDoubleClick={() => dispatchCanChange(item.id)}>{item.text}</span>
+              : <div>
+                  <span onDoubleClick={() => dispatchCanChange(item.id)}>{item.text}</span>
+                  <button onClick={() => dispatchDelete(item.id)}>Удалить</button>
+                </div>
             }
           </li>
         ))}
