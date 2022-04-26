@@ -1,0 +1,113 @@
+button {
+  padding: 5px 10px;
+  color: #EDF5E1;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #05386B;
+  border: 1px solid #05386B;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.wrapper {
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.title {
+  width: 40%;
+  padding-bottom: 10px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  border-bottom: 8px solid #05386B;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form textarea {
+  flex: 2;
+  padding: 10px;
+  min-height: 220px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px #05386b;
+  border: 0;
+}
+
+.form textarea:focus{
+  border: none;
+  outline: none;
+}
+
+.form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.item {
+  padding: 10px;
+  max-height: 100px;
+  box-shadow: 0px 0px 10px #05386b;
+  overflow: auto;
+  border-radius: 6px;
+}
+
+.item_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; 
+  gap: 15px;
+}
+
+.item span {
+  display: block;
+}
+
+.change {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  top: 0;
+  left: 0;
+  background-color: #05386B;
+}
+
+.change textarea {
+  width: 100%;
+  padding: 10px;
+  height: 80%;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px #5CDB95;
+  border: 0;
+}
+
+.change textarea:focus {
+  border: none;
+  outline: none;
+}
+
+.change button {
+  background-color: #5CDB95;
+}
