@@ -63,7 +63,7 @@ button {
 
 .item {
   padding: 10px;
-  max-height: 100px;
+  max-height: 200px;
   box-shadow: 0px 0px 10px #05386b;
   overflow: auto;
   border-radius: 6px;
@@ -74,6 +74,19 @@ button {
   justify-content: space-between;
   align-items: flex-start; 
   gap: 15px;
+}
+
+.item_inner div {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.item_text {
+  display: block;
+  padding: 0 10px;
+  border-left: 1px solid #05386B;
+  text-align: justify;
 }
 
 .item span {
@@ -110,6 +123,17 @@ button {
 
 .change button {
   background-color: #5CDB95;
+}
+
+.date {
+  display: block;
+  padding: 5px 10px;
+  color: #EDF5E1;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #05386B;
+  border: 1px solid #05386B;
+  border-radius: 6px;
 }
 
 @media (max-width: 767px) {
