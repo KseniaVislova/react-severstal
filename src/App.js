@@ -1,10 +1,11 @@
 import React, { useState, useReducer, useEffect } from "react";
+import { format } from 'date-fns'
 import styles from "./App.module.css";
 
 const temp = localStorage.getItem("data");
 const getSaveData = () => {
   const temp = localStorage.getItem("data");
-  const initialValue = temp ? JSON.parse(temp) : { items: [{id: 1, text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", canChange: false}], };
+  const initialValue = temp ? JSON.parse(temp) : { items: [{id: 1, text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.", canChange: false, date: format(new Date(2022, 3, 26), 'dd.MM.yyyy')}], };
   return initialValue;
 }
 
@@ -16,7 +17,7 @@ function reducer(state = initialState, action) {
       return { ...state, items: action.payload };
     case "updateCanChange": 
       return { ...state, items: action.payload };
-    case "updateItem": 
+    case "updateItem":
       return { ...state, items: action.payload };
     case "deleteItem": 
       return { ...state, items: action.payload };
@@ -31,8 +32,6 @@ const App = () => {
   const [data, dispatch] = useReducer(reducer, initialState);
   const [newItem, setNewItem] = useState("");
   const [value, setValue] = useState('');
-  const [inputError, setInputError] = useState(false);
-  const [errorText, setErrorText] = useState('');
 
   const changeNewItem = (e) => {
     setNewItem(e.target.value);
@@ -47,18 +46,19 @@ const App = () => {
     const obj = {
       id: Math.floor(new Date().getTime() + (Math.random() * 10)),
       text: newItem,
-      canChange: false
+      canChange: false,
+      date: format(new Date(), 'dd.MM.yyyy')
     }
     if (newItem !== '') {
       dispatch({
         type: "updateNotes",
-        payload: [...data.items, obj]
+        payload: [obj, ...data.items]
       });
       setNewItem("");
     }
   }
 
-  const dispatchSaveItem = (id, item) => {
+  const dispatchSaveItem = (id) => {
     const newItemList = data.items.map((item) => {
       const newItem = { ...item };
       if (item.id === id) {
@@ -133,16 +133,16 @@ const App = () => {
       <button onClick={dispatchDeleteAll}>Очистить все заметки</button>
       <ul className={styles.list}>
         {data.items.map((item) => (
-          <li key={item.id} className={styles.item}> 
+          <li key={item.id} className={styles.item}>
             {item.canChange 
               ? <div className={styles.change}>
                   <textarea onChange={changeItem} value={value}>{value}</textarea>
-                  {(inputError) && <div>{errorText}</div>} 
                   <button onClick={cancelEdit}>Отмена</button> 
-                  <button onClick={() => dispatchSaveItem (item.id, item.text)}>Сoхранить</button>  
+                  <button onClick={() => dispatchSaveItem (item.id)}>Сoхранить</button>  
                 </div>
               : <div className={styles.item_inner}>
-                  <span onDoubleClick={() => dispatchCanChange(item.id)}>{item.text}</span>
+                  <div><span className={styles.date}>{item.date}</span>
+                  <span onDoubleClick={() => dispatchCanChange(item.id)} className={styles.item_text}>{item.text}</span></div>
                   <button onClick={() => dispatchDelete(item.id)}>X</button>
                 </div>
             }
